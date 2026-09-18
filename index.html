@@ -36,7 +36,7 @@
                 <img src="assets/images/Banda.jpg" alt="Foto da banda Reatância no palco sob iluminação de show" width="1920" height="1080">
                 <figcaption class="hero-caption">
                     <h1>Banda Reatância</h1>
-                    <p>O peso do rock direto da Engenharia da UNESP.</p>
+                    <p>O peso do Rock'n'Roll diretamente da Engenharia da UNESP.</p>
                 </figcaption>
             </figure>
         </section>
@@ -45,23 +45,27 @@
         <section id="sobre" class="about">
             <h2>Sobre a Banda</h2>
             <article>
-                <p>A Reatância é uma banda cover de rock nascida em 2026 inicialmente no campus
+                <p style="text-indent: 2em;">A Reatância é uma banda cover de rock nascida em 2026 inicialmente no campus
                 de Engenharia de Controle e Automação da UNESP de Sorocaba. O nome surgiu devido à
                 matéria de circuitos elétricos, obrigatória para os alunos de Engenharia de Controle
                 e Automação. O estudo de correntes alternadas e do comportamento de capacitores e indutores
                 foi a principal inspiração para o nome da banda.</p>
-                <p>Os primeiros integrantes da banda foram Caets, Soso e Regatinha, os três estudantes da UNESP
+                <p style="text-indent: 2em;">Os primeiros integrantes da banda foram Caets, Soso e Regata, os três estudantes da UNESP
                 de três turmas diferentes, que se conheceram em um coletivo da faculdade,
                 logo começaram a busca pelos outros membros. Caets convidou Tejada, que já havia tocado com
                 ele em outra banda, além de ser um amigo de anos, e o mesmo encontrou Bugas por indicação de um
                 amigo em comum da mesma turma que Caets, e sem pensar duas vezes,
                 ambos aceitaram o convite para fazer parte da Reatância.</p>
-                <p>Dia 00/00/2026 foi realizado o primeiro ensaio da Reatância, que até então ainda não possuía
+                <p style="text-indent: 2em;">Dia 25/05/2026 foi realizado o primeiro ensaio da Reatância, que até então ainda não possuía
                 esse nome, durante o primeiro ensaio, o repertório era apenas de 5 músicas, sendo elas: "All I Wanted - Paramore", 
                 "I Hate Everything About You - Three Days Grace", "Bring Me To Life - Evanescence", "Separate Ways - Journey", 
-                "Animals - Nickelback".
+                "Animals - Nickelback". "Neste dia tivemos um grande problema com microfonia, que também se repetiu durante a primeira
+                apresentação da banda, que ocorreu no dia 16/06/2026, na festa junina da UNESP Sorocaba, mas mesmo assim conseguimos tocar 
+                todas as músicas do repertório e a apresentação foi um sucesso, com o público cantando junto.", diz Caets, guitarrista da banda.
                 </p>
-
+                <p style="text-indent: 2em;">Após o primeiro ensaio, os cinco começaram a pensar em um nome oficial para a banda, sendo as três
+                principais opções: "Reatância", "Impedância" e "Microfonia". Após uma votação, o nome "Reatância" foi escolhido, e a banda passou 
+                a se apresentar com esse nome.</p>
                 </p>
             </article>
         </section>
@@ -70,9 +74,12 @@
         <section id="membros" class="members">
             <h2>Integrantes</h2>
             <div class="members-grid">
-                <article class="member-card">
+                <!-- Adicione data-member e a tag de vídeo em todos os cards -->
+                <article class="member-card" data-member="soso">
                     <figure>
                         <img src="assets/images/Soso.jpg" alt="Foto de Soso" width="300" height="300" loading="lazy">
+                        <!-- O vídeo que tocará no hover (coloque seu vídeo real de 5s no src) -->
+                        <video src="assets/videos/soso-hover.mp4" class="hover-video" muted loop playsinline></video>
                         <figcaption>
                             <h3>Soso</h3>
                             <p>Vocalista | Engenharia UNESP</p>
@@ -80,9 +87,10 @@
                     </figure>
                 </article>
 
-                <article class="member-card">
+                <article class="member-card" data-member="caets">
                     <figure>
                         <img src="assets/images/Caets.jpg" alt="Foto de Caets" width="300" height="300" loading="lazy">
+                        <video src="assets/videos/caets-hover.mp4" class="hover-video" muted loop playsinline></video>
                         <figcaption>
                             <h3>Caets</h3>
                             <p>Guitarra Solo | Engenharia UNESP</p>
@@ -90,19 +98,21 @@
                     </figure>
                 </article>
 
-                <article class="member-card">
+                <article class="member-card" data-member="regata">
                     <figure>
-                        <img src="assets/images/Regata.jpg" alt="Foto de Regatinha" width="300" height="300" loading="lazy">
+                        <img src="assets/images/Regata.jpg" alt="Foto de Regata" width="300" height="300" loading="lazy">
+                        <video src="assets/videos/regata-hover.mp4" class="hover-video" muted loop playsinline></video>
                         <figcaption>
-                            <h3>Regatinha</h3>
+                            <h3>Regata</h3>
                             <p>Guitarra Base | Engenharia UNESP</p>
                         </figcaption>
                     </figure>
                 </article>
 
-                <article class="member-card">
+                <article class="member-card" data-member="tejada">
                     <figure>
                         <img src="assets/images/Tejada.jpg" alt="Foto de Tejada" width="300" height="300" loading="lazy">
+                        <video src="assets/videos/tejada-hover.mp4" class="hover-video" muted loop playsinline></video>
                         <figcaption>
                             <h3>Tejada</h3>
                             <p>Baixista</p>
@@ -110,9 +120,10 @@
                     </figure>
                 </article>
 
-                <article class="member-card">
+                <article class="member-card" data-member="bugas">
                     <figure>
                         <img src="assets/images/Bugas.jpg" alt="Foto de Bugas" width="300" height="300" loading="lazy">
+                        <video src="assets/videos/bugas-hover.mp4" class="hover-video" muted loop playsinline></video>
                         <figcaption>
                             <h3>Bugas</h3>
                             <p>Baterista</p>
@@ -127,10 +138,10 @@
             <h2>Reatância ao Vivo</h2>
             <figure class="video-container">
                 <video controls width="800" poster="assets/images/thumb-video.jpg">
-                    <source src="assets/videos/apresentacao.mp4" type="video/mp4">
+                    <source src="assets/videos/Creep.mp4" type="video/mp4">
                     Seu navegador não suporta a reprodução de vídeos HTML5.
                 </video>
-                <figcaption>Apresentação ao vivo da banda tocando na festa junina da UNESP Sorocaba.</figcaption>
+                <figcaption>Apresentação ao vivo da banda tocando na festa junina da UNESP Sorocaba 16/06/2026.</figcaption>
             </figure>
         </section>
 
@@ -155,8 +166,8 @@
             <aside class="social-aside">
                 <h3>Siga a Reatância</h3>
                 <ul>
-                    <li><a href="#" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-                    <li><a href="#" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+                    <li><a href="https://www.instagram.com/banda.reatancia/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                    <li><a href="https://www.youtube.com/@BandaReat%C3%A2ncia" target="_blank" rel="noopener noreferrer">YouTube</a></li>
                 </ul>
             </aside>
         </section>
@@ -220,6 +231,19 @@
         <p>&copy; 2026 Banda Reatância. Todos os direitos reservados.</p>
         <p>Projeto acadêmico - Engenharia de Controle e Automação - UNESP</p>
     </footer>
+
+    <div id="member-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Fechar modal">&times;</button>
+            <div class="modal-body">
+                <h3 id="modal-title">Nome do Integrante</h3>
+                <h4 id="modal-role">Função</h4>
+                <div id="modal-text">
+                    <!-- A história será injetada aqui pelo JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Vínculo com o arquivo JS externo -->
     <script src="js/script.js"></script>
