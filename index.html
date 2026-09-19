@@ -151,8 +151,8 @@
                 <div class="shows-list">
                     <h2>Próximos Shows</h2>
                     <article class="show-item">
-                        <h3>Festival Universitário</h3>
-                        <p><time datetime="2026-10-29">29 de Outubro de 2026</time> - Sorocaba/SP</p>
+                        <h3>Festa Folclórica UNESP - Sorocaba</h3>
+                        <p><time datetime="2026-10-29">28 de Outubro de 2026</time> - Sorocaba/SP</p>
                     </article>
                 </div>
 
@@ -178,49 +178,78 @@
             <p>Adquira os produtos oficiais da banda.</p>
             
             <div class="products-grid">
-                <article class="product-card">
-                    <figure>
-                        <img src="assets/images/camiseta-preview.jpg" alt="Camiseta oficial preta com o logo Reatância" width="250" height="250" loading="lazy">
-                        <figcaption>
-                            <h3>Camiseta Oficial</h3>
-                            <p class="price">R$ 69,90</p>
-                        </figcaption>
+
+                <!-- CAMISETAS (Manga Frente/Trás + Regata Frente/Trás) -->
+                <article class="product-card" data-images='[
+                    "assets/images/camiseta-frente.png",
+                    "assets/images/camiseta-costas.png",
+                    "assets/images/regata-frente.png",
+                    "assets/images/regata-costas.png"
+                ]'>
+                    <figure class="product-gallery">
+                        <button class="gallery-btn prev-btn" aria-label="Imagem anterior">&#10094;</button>
+                        <img src="assets/images/camiseta-frente.png" alt="Camiseta Oficial Reatância" class="product-img" width="250" height="250" loading="lazy">
+                        <button class="gallery-btn next-btn" aria-label="Próxima imagem">&#10095;</button>
                     </figure>
+                    <figcaption>
+                        <h3>Camiseta & Regata Oficial</h3>
+                        <p class="price">R$ 69,90</p>
+                    </figcaption>
                     <button class="btn-primary btn-buy" data-product="camiseta">Ver Opções</button>
                 </article>
 
-                <article class="product-card">
-                    <figure>
-                        <img src="assets/images/bone-preview.jpg" alt="Boné preto com bordado Reatância" width="250" height="250" loading="lazy">
-                        <figcaption>
-                            <h3>Boné Reatância</h3>
-                            <p class="price">R$ 49,90</p>
-                        </figcaption>
+                <!-- BONÉS (Modelo 1 e Modelo 2) -->
+                <article class="product-card" data-images='[
+                    "assets/images/bone1.png",
+                    "assets/images/bone2.png",
+                    "assets/images/bone3.png"
+                ]'>
+                    <figure class="product-gallery">
+                        <button class="gallery-btn prev-btn" aria-label="Imagem anterior">&#10094;</button>
+                        <img src="assets/images/bone1.png" alt="Boné Reatância" class="product-img" width="250" height="250" loading="lazy">
+                        <button class="gallery-btn next-btn" aria-label="Próxima imagem">&#10095;</button>
                     </figure>
+                    <figcaption>
+                        <h3>Boné Reatância</h3>
+                        <p class="price">R$ 49,90</p>
+                    </figcaption>
                     <button class="btn-primary btn-buy" data-product="bone">Ver Opções</button>
                 </article>
 
-                <article class="product-card">
-                    <figure>
-                        <img src="assets/images/bottom-preview.jpg" alt="Bottom metálico com o simbolo de circuito" width="250" height="250" loading="lazy">
-                        <figcaption>
-                            <h3>Bottom / Botton</h3>
-                            <p class="price">R$ 3,00</p>
-                        </figcaption>
+                <!-- BOTTONS (Modelo 1 e Modelo 2) -->
+                <article class="product-card" data-images='[
+                    "assets/images/botton1.png",
+                    "assets/images/botton2.png"
+                ]'>
+                    <figure class="product-gallery">
+                        <button class="gallery-btn prev-btn" aria-label="Imagem anterior">&#10094;</button>
+                        <img src="assets/images/botton1.png" alt="Bottom metálico" class="product-img" width="250" height="250" loading="lazy">
+                        <button class="gallery-btn next-btn" aria-label="Próxima imagem">&#10095;</button>
                     </figure>
+                    <figcaption>
+                        <h3>Bottom / Botton</h3>
+                        <p class="price">R$ 3,00</p>
+                    </figcaption>
                     <button class="btn-primary btn-buy" data-product="bottom">Ver Opções</button>
                 </article>
 
-                <article class="product-card">
-                    <figure>
-                        <img src="assets/images/adesivo-preview.jpg" alt="Cartela de adesivos vinílicos da banda" width="250" height="250" loading="lazy">
-                        <figcaption>
-                            <h3>Adesivo Vinílico</h3>
-                            <p class="price">R$ 1,50</p>
-                        </figcaption>
+                <!-- ADESIVOS (Modelo 1 e Modelo 2) -->
+                <article class="product-card" data-images='[
+                    "assets/images/adesivo1.png",
+                    "assets/images/adesivo2.png"
+                ]'>
+                    <figure class="product-gallery">
+                        <button class="gallery-btn prev-btn" aria-label="Imagem anterior">&#10094;</button>
+                        <img src="assets/images/adesivo1.png" alt="Adesivo Vinílico" class="product-img" width="250" height="250" loading="lazy">
+                        <button class="gallery-btn next-btn" aria-label="Próxima imagem">&#10095;</button>
                     </figure>
+                    <figcaption>
+                        <h3>Adesivo Vinílico</h3>
+                        <p class="price">R$ 1,50</p>
+                    </figcaption>
                     <button class="btn-primary btn-buy" data-product="adesivo">Ver Opções</button>
                 </article>
+
             </div>
         </section>
 

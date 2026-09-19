@@ -433,10 +433,9 @@ footer {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease;
-    pointer-events: none; /* Deixa o clique passar para o figure */
+    pointer-events: none;
 }
 
-/* Quando passa o mouse, esconde a foto e mostra o vídeo */
 .member-card:hover img {
     opacity: 0;
 }
@@ -446,19 +445,19 @@ footer {
     visibility: visible;
 }
 
-/* Estilos da Caixa Flutuante (Modal) */
+/* Estilos da Caixa Flutuante (Modal com Limite de Altura e Rolagem) */
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(10, 10, 12, 0.85); /* Fundo semi-transparente escuro */
+    background: rgba(10, 10, 12, 0.85);
     backdrop-filter: blur(5px);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 2000; /* Acima do cabeçalho */
+    z-index: 2000;
     opacity: 0;
     visibility: hidden;
     transition: var(--transition);
@@ -475,11 +474,14 @@ footer {
     border-radius: var(--border-radius);
     width: 90%;
     max-width: 600px;
-    padding: 2.5rem;
+    max-height: 80vh; /* Limita a altura a 80% da tela */
+    padding: 2.5rem 2rem 2rem 2.5rem;
     position: relative;
     transform: translateY(-20px);
     transition: var(--transition);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
 }
 
 .modal-overlay.active .modal-content {
@@ -497,10 +499,17 @@ footer {
     cursor: pointer;
     transition: var(--transition);
     line-height: 1;
+    z-index: 10;
 }
 
 .modal-close:hover {
     color: var(--accent-red);
+}
+
+/* Área interna do conteúdo com barra de rolagem */
+.modal-body {
+    overflow-y: auto; /* Cria a barra de rolagem se o texto for grande */
+    padding-right: 1rem; /* Dá espaço para o texto não colar na barra */
 }
 
 .modal-body h3 {
@@ -520,4 +529,72 @@ footer {
 .modal-body p {
     text-indent: 2em;
     color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+/* Estilização personalizada da barra de rolagem (Tema Dark/Rock) */
+.modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background: var(--accent-blue);
+    border-radius: 4px;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-red);
+}
+
+/* ==========================================================================
+   11. CARROSSEL DE IMAGENS NOS CARDS DA LOJA
+   ========================================================================== */
+.product-gallery {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(10, 10, 12, 0.75);
+    color: var(--text-gold);
+    border: 1px solid rgba(37, 99, 235, 0.4);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    z-index: 5;
+}
+
+.gallery-btn:hover {
+    background: var(--accent-red);
+    color: #ffffff;
+    border-color: var(--accent-red);
+}
+
+.prev-btn {
+    left: 5px;
+}
+
+.next-btn {
+    right: 5px;
+}
+
+.product-img {
+    transition: opacity 0.25s ease;
 }
