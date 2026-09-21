@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso - Reatância</title>
+    <!-- Importando o CSS global -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            
+            <!-- SEÇÃO DE LOGIN -->
+            <div id="login-section">
+                <h2>Entrar</h2>
+                <p style="margin-bottom: 1.5rem; opacity: 0.8;">Acesse sua conta</p>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-user">Nome de usuário ou E-mail</label>
+                        <input type="text" id="login-user" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-senha">Senha</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="login-senha" required minlength="8" placeholder="Mínimo 8 caracteres">
+                            <button type="button" class="btn-toggle-password" data-target="login-senha" title="Mostrar/Ocultar Senha">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="eye-icon">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <p id="login-error" class="error-msg">Preencha os campos corretamente!</p>
+                    <button type="submit" class="btn-primary" style="width: 100%; margin-top: 1rem;">Entrar</button>
+                </form>
+                <p style="margin-top: 1.5rem; font-size: 0.9rem;">
+                    Ainda não cadastrado? <span class="toggle-link" id="btn-show-register">Criar uma conta</span>
+                </p>
+            </div>
+
+            <!-- SEÇÃO DE CADASTRO -->
+            <div id="register-section" style="display: none;">
+                <h2>Cadastro</h2>
+                <p style="margin-bottom: 1.5rem; opacity: 0.8;">Crie sua conta na Reatância</p>
+                <form id="register-form">
+                    <div class="form-group">
+                        <label for="reg-user">Nome de Usuário</label>
+                        <input type="text" id="reg-user" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-idade">Idade</label>
+                        <input type="number" id="reg-idade" required min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-email">E-mail</label>
+                        <input type="email" id="reg-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-senha">Senha</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="reg-senha" required minlength="8" placeholder="Mínimo 8 caracteres">
+                            <button type="button" class="btn-toggle-password" data-target="reg-senha" title="Mostrar/Ocultar Senha">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="eye-icon">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-confirma-senha">Confirmar Senha</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="reg-confirma-senha" required minlength="8">
+                            <button type="button" class="btn-toggle-password" data-target="reg-confirma-senha" title="Mostrar/Ocultar Senha">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="eye-icon">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <p id="reg-error" class="error-msg">Verifique os dados informados!</p>
+                    <button type="submit" class="btn-primary" style="width: 100%; margin-top: 1rem;">Finalizar Cadastro</button>
+                </form>
+                <p style="margin-top: 1.5rem; font-size: 0.9rem;">
+                    Já tem uma conta? <span class="toggle-link" id="btn-show-login">Fazer login</span>
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Script se mantém o mesmo -->
+    <script>
+        const togglePasswordButtons = document.querySelectorAll('.btn-toggle-password');
+
+        togglePasswordButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-target');
+                const inputElement = document.getElementById(targetId);
+                const svgIcon = this.querySelector('svg');
+
+                if (inputElement.type === 'password') {
+                    inputElement.type = 'text';
+                    svgIcon.innerHTML = `
+                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                        <line x1="1" y1="1" x2="23" y2="23"></line>
+                    `;
+                } else {
+                    inputElement.type = 'password';
+                    svgIcon.innerHTML = `
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    `;
+                }
+            });
+        });
+
+        const loginSection = document.getElementById('login-section');
+        const registerSection = document.getElementById('register-section');
+        
+        document.getElementById('btn-show-register').addEventListener('click', () => {
+            loginSection.style.display = 'none';
+            registerSection.style.display = 'block';
+        });
+
+        document.getElementById('btn-show-login').addEventListener('click', () => {
+            registerSection.style.display = 'none';
+            loginSection.style.display = 'block';
+        });
+
+        function efetuarLogin() {
+            localStorage.setItem('logado', 'true');
+            const urlParams = new URLSearchParams(window.location.search);
+            const origem = urlParams.get('origem');
+
+            if (origem === 'loja') {
+                window.location.href = 'compras.html';
+            } else {
+                window.location.href = 'index.html';
+            }
+        }
+
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const senha = document.getElementById('login-senha').value;
+            const errorMsg = document.getElementById('login-error');
+
+            if (senha.length < 8) {
+                errorMsg.textContent = "A senha deve ter pelo menos 8 caracteres.";
+                errorMsg.style.display = 'block';
+                return;
+            }
+
+            errorMsg.style.display = 'none';
+            efetuarLogin(); 
+        });
+
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const senha = document.getElementById('reg-senha').value;
+            const confirmaSenha = document.getElementById('reg-confirma-senha').value;
+            const errorMsg = document.getElementById('reg-error');
+
+            if (senha.length < 8) {
+                errorMsg.textContent = "A senha deve ter pelo menos 8 caracteres.";
+                errorMsg.style.display = 'block';
+                return;
+            }
+
+            if (senha !== confirmaSenha) {
+                errorMsg.textContent = "As senhas não coincidem!";
+                errorMsg.style.display = 'block';
+                return;
+            }
+
+            errorMsg.style.display = 'none';
+            efetuarLogin(); 
+        });
+    </script>
+</body>
+</html>

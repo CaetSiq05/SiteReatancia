@@ -126,15 +126,41 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =================================================================
-    // BOTÃO DE LOGIN ORIGINAL
+    // LÓGICA DE AUTENTICAÇÃO E REDIRECIONAMENTO (LOJA E LOGIN)
     // =================================================================
     const btnLogin = document.getElementById('btn-login');
+    
+    // Verifica se o usuário tem a chave 'logado' salva no navegador
+    const isLogado = localStorage.getItem('logado') === 'true';
+
     if (btnLogin) {
-        btnLogin.addEventListener('click', () => {
-            console.log('Botão Entrar/Cadastrar clicado.');
-            // Aqui você pode adicionar lógica de modal de login depois
-        });
+        if (isLogado) {
+            // Se estiver logado, muda o botão para "Sair"
+            btnLogin.textContent = 'Sair';
+            btnLogin.addEventListener('click', () => {
+                localStorage.removeItem('logado'); // Remove o login
+                window.location.reload(); // Recarrega a página
+            });
+        } else {
+            // Se não estiver, manda para a tela de login
+            btnLogin.addEventListener('click', () => {
+                window.location.href = 'login.html?origem=home';
+            });
+        }
     }
+
+    const buyButtons = document.querySelectorAll('.btn-buy');
+    buyButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (isLogado) {
+                // Se já estiver logado, vai direto para as compras
+                window.location.href = 'compras.html';
+            } else {
+                // Se não estiver, manda fazer o login primeiro
+                window.location.href = 'login.html?origem=loja';
+            }
+        });
+    });
 
     // =================================================================
     // CARROSSEL DE PRODUTOS DA LOJA

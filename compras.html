@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja - Reatância</title>
+    <!-- Importando o CSS global primeiro -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Importando o CSS específico de compras depois -->
+    <link rel="stylesheet" href="css/compras.css">
+</head>
+<body>
+    <header class="shop-header">
+        <div class="logo"><a href="index.html" style="color:var(--accent-red); text-decoration:none; font-family:var(--font-heading); font-size:1.5rem;">REATÂNCIA LOJA</a></div>
+        <button class="cart-btn" id="btn-open-cart">
+            Carrinho <span class="cart-count" id="cart-count">0</span>
+        </button>
+    </header>
+
+    <main class="shop-main">
+        
+        <h2 class="category-title">Camisetas Oficiais</h2>
+        <div class="shop-grid">
+            <!-- Camiseta Modelo 1 -->
+            <article class="product-card" data-images='["assets/images/camiseta-frente.png", "assets/images/camiseta-costas.png"]'>
+                <figure class="product-gallery">
+                    <button class="gallery-btn prev-btn">&#10094;</button>
+                    <img src="assets/images/camiseta-frente.png" class="product-img" alt="Camiseta Padrão" width="250" height="250">
+                    <button class="gallery-btn next-btn">&#10095;</button>
+                </figure>
+                <figcaption>
+                    <h3>Camiseta Oficial</h3>
+                    <p class="price">R$ 69,90</p>
+                </figcaption>
+                <button class="btn-primary btn-add-cart" data-type="roupa" data-id="cam-1" data-name="Camiseta Oficial" data-price="69.90" data-img="assets/images/camiseta-frente.png">Adicionar</button>
+            </article>
+
+            <!-- Camiseta Modelo 2 (Regata) -->
+            <article class="product-card" data-images='["assets/images/regata-frente.png", "assets/images/regata-costas.png"]'>
+                <figure class="product-gallery">
+                    <button class="gallery-btn prev-btn">&#10094;</button>
+                    <img src="assets/images/regata-frente.png" class="product-img" alt="Regata" width="250" height="250">
+                    <button class="gallery-btn next-btn">&#10095;</button>
+                </figure>
+                <figcaption>
+                    <h3>Regata Oficial</h3>
+                    <p class="price">R$ 69,90</p>
+                </figcaption>
+                <button class="btn-primary btn-add-cart" data-type="roupa" data-id="cam-2" data-name="Regata Oficial" data-price="69.90" data-img="assets/images/regata-frente.png">Adicionar</button>
+            </article>
+        </div>
+
+        <h2 class="category-title">Bonés</h2>
+        <div class="shop-grid">
+            <!-- Boné 1 -->
+            <article class="product-card">
+                <img src="assets/images/bone1.png" alt="Boné Mod 1" width="250" height="250" style="object-fit: contain; margin-bottom:1rem;">
+                <figcaption>
+                    <h3>Boné Aba Reta</h3>
+                    <p class="price">R$ 49,90</p>
+                </figcaption>
+                <button class="btn-primary btn-add-cart" data-type="acessorio" data-id="bone-1" data-name="Boné Aba Reta" data-price="49.90" data-img="assets/images/bone1.png">Adicionar</button>
+            </article>
+            <!-- Boné 2 -->
+            <article class="product-card">
+                <img src="assets/images/bone2.png" alt="Boné Mod 2" width="250" height="250" style="object-fit: contain; margin-bottom:1rem;">
+                <figcaption>
+                    <h3>Boné Reatância</h3>
+                    <p class="price">R$ 49,90</p>
+                </figcaption>
+                <button class="btn-primary btn-add-cart" data-type="acessorio" data-id="bone-2" data-name="Boné Reatância" data-price="49.90" data-img="assets/images/bone2.png">Adicionar</button>
+            </article>
+            <!-- Boné 3 -->
+            <article class="product-card">
+                <img src="assets/images/bone3.png" alt="Boné Mod 3" width="250" height="250" style="object-fit: contain; margin-bottom:1rem;">
+                <figcaption>
+                    <h3>Boné RLC</h3>
+                    <p class="price">R$ 49,90</p>
+                </figcaption>
+                <button class="btn-primary btn-add-cart" data-type="acessorio" data-id="bone-3" data-name="Boné RLC" data-price="49.90" data-img="assets/images/bone3.png">Adicionar</button>
+            </article>
+        </div>
+
+        <h2 class="category-title">Bottons & Adesivos</h2>
+        <div class="shop-grid">
+            <article class="product-card">
+                <img src="assets/images/botton1.png" alt="Botton 1" width="250" height="250" style="object-fit: contain; margin-bottom:1rem;">
+                <h3>Botton Reatância</h3><p class="price">R$ 3,00</p>
+                <button class="btn-primary btn-add-cart" data-type="acessorio" data-id="bot-1" data-name="Botton Reatância" data-price="3.00" data-img="assets/images/botton1.png">Adicionar</button>
+            </article>
+            <article class="product-card">
+                <img src="assets/images/botton2.png" alt="Botton 2" width="250" height="250" style="object-fit: contain; margin-bottom:1rem;">
+                <h3>Botton RLC</h3><p class="price">R$ 3,00</p>
+                <button class="btn-primary btn-add-cart" data-type="acessorio" data-id="bot-2" data-name="Botton RLC" data-price="3.00" data-img="assets/images/botton2.png">Adicionar</button>
+            </article>
+            <article class="product-card">
+                <img src="assets/images/adesivo1.png" alt="Adesivo 1" width="250" height="250" style="object-fit: contain; margin-bottom:1rem;">
+                <h3>Adesivo Logo</h3><p class="price">R$ 1,50</p>
+                <button class="btn-primary btn-add-cart" data-type="acessorio" data-id="ad-1" data-name="Adesivo Logo" data-price="1.50" data-img="assets/images/adesivo1.png">Adicionar</button>
+            </article>
+            <article class="product-card">
+                <img src="assets/images/adesivo2.png" alt="Adesivo 2" width="250" height="250" style="object-fit: contain; margin-bottom:1rem;">
+                <h3>Adesivo Indutor</h3><p class="price">R$ 1,50</p>
+                <button class="btn-primary btn-add-cart" data-type="acessorio" data-id="ad-2" data-name="Adesivo Indutor" data-price="1.50" data-img="assets/images/adesivo2.png">Adicionar</button>
+            </article>
+        </div>
+    </main>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="toast">Item adicionado ao carrinho!</div>
+
+    <!-- MODAL DE TAMANHO -->
+    <div id="modal-size" class="custom-modal">
+        <div class="custom-modal-content" style="text-align: center;">
+            <h3 style="color:var(--text-gold); margin-bottom:1rem;">Escolha o Tamanho</h3>
+            <div class="size-options" id="size-options">
+                <button class="size-btn">PP</button>
+                <button class="size-btn">P</button>
+                <button class="size-btn">M</button>
+                <button class="size-btn">G</button>
+                <button class="size-btn">GG</button>
+            </div>
+            <button class="btn-primary" id="confirm-size-btn" style="margin-top: 1.5rem; width: 100%;" disabled>Confirmar e Adicionar</button>
+            <button class="btn-secondary" onclick="closeModal('modal-size')" style="margin-top: 0.5rem; width: 100%;">Cancelar</button>
+        </div>
+    </div>
+
+    <!-- MODAL DO CARRINHO -->
+    <div id="modal-cart" class="custom-modal">
+        <div class="custom-modal-content">
+            <h2 style="color:var(--text-gold); margin-bottom:1.5rem; border-bottom:1px solid var(--accent-blue); padding-bottom:0.5rem;">Seu Carrinho</h2>
+            <div id="cart-items-container" class="cart-items">
+                <!-- Itens injetados via JS -->
+            </div>
+            <div class="cart-total" id="cart-total-display">Total: R$ 0,00</div>
+            <button class="btn-primary" id="btn-checkout" style="width: 100%;">Ir para Pagamento</button>
+            <button class="btn-secondary" onclick="closeModal('modal-cart')" style="margin-top: 0.5rem; width: 100%;">Continuar Comprando</button>
+        </div>
+    </div>
+
+    <!-- MODAL DE CHECKOUT -->
+    <div id="modal-checkout" class="custom-modal">
+        <div class="custom-modal-content">
+            <h2 style="color:var(--text-gold); margin-bottom:1rem;">Finalizar Pedido</h2>
+            <form id="checkout-form">
+                
+                <!-- Endereço e Frete -->
+                <div class="checkout-grid">
+                    <div class="form-group" style="grid-column: 1 / -1;">
+                        <label>CEP</label>
+                        <input type="text" id="cep-input" placeholder="00000-000" maxlength="9" required>
+                    </div>
+                    <div class="form-group" style="grid-column: 1 / -1;">
+                        <label>Rua</label>
+                        <input type="text" id="rua-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Número</label>
+                        <input type="text" id="num-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Complemento</label>
+                        <input type="text" id="comp-input" placeholder="Opcional">
+                    </div>
+                    <div class="form-group">
+                        <label>Bairro</label>
+                        <input type="text" id="bairro-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Cidade / UF</label>
+                        <input type="text" id="cidade-input" required>
+                    </div>
+                </div>
+                
+                <p id="frete-display" style="color:var(--text-primary); font-size:0.9rem; margin-bottom:1rem;"></p>
+
+                <!-- Pagamento -->
+                <div class="form-group">
+                    <label>Forma de Pagamento</label>
+                    <select id="pagamento-metodo" style="width:100%; padding:0.8rem; background:var(--bg-primary); color:white; border:1px solid var(--accent-blue);">
+                        <option value="pix">PIX</option>
+                        <option value="debito">Cartão de Débito</option>
+                        <option value="credito">Cartão de Crédito</option>
+                    </select>
+                </div>
+
+                <!-- Dados do Cartão -->
+                <div id="dados-cartao" class="checkout-grid hidden">
+                    <div class="form-group" style="grid-column: 1 / -1;">
+                        <label>Nome impresso no Cartão</label>
+                        <input type="text" id="cartao-nome">
+                    </div>
+                    <div class="form-group" style="grid-column: 1 / -1;">
+                        <label>Número do Cartão</label>
+                        <input type="text" id="cartao-numero" maxlength="19" placeholder="0000 0000 0000 0000">
+                    </div>
+                    <div class="form-group">
+                        <label>Validade</label>
+                        <input type="text" id="cartao-validade" maxlength="5" placeholder="MM/AA">
+                    </div>
+                    <div class="form-group">
+                        <label>CVV</label>
+                        <input type="text" id="cartao-cvv" maxlength="4" placeholder="123">
+                    </div>
+                </div>
+
+                <!-- Parcelamento -->
+                <div class="form-group hidden" id="parcelamento-container">
+                    <label>Parcelas (Com juros reais)</label>
+                    <select id="parcelamento-select" style="width:100%; padding:0.8rem; background:var(--bg-primary); color:white; border:1px solid var(--accent-blue);">
+                        <!-- Injetado via JS -->
+                    </select>
+                </div>
+
+                <div class="cart-total" id="checkout-total" style="margin-top:1.5rem;">Total a pagar: R$ 0,00</div>
+                
+                <button type="submit" class="btn-primary" style="width: 100%;">Confirmar Pedido</button>
+                <button type="button" class="btn-secondary" onclick="closeModal('modal-checkout')" style="margin-top: 0.5rem; width: 100%;">Voltar</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Importando o JS no final da página -->
+    <script src="js/compras.js"></script>
+</body>
+</html>
