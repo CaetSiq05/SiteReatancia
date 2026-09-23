@@ -6,6 +6,8 @@
     <meta name="description" content="Site oficial da banda Reatância. Rock, agenda de shows, mídias e loja oficial.">
     <title>Reatância | Banda de Rock</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="preload" as="image" href="assets/images/Banda-Mobile2.webp" media="(max-width: 750px)" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/images/Banda2.webp" media="(min-width: 751px)" fetchpriority="high">
 </head>
 <body>
 
@@ -33,7 +35,10 @@
         <!-- Banner / Hero Section -->
         <section id="home" class="hero">
             <figure class="hero-banner">
-                <img src="assets/images/Banda.jpg" alt="Foto da banda Reatância no palco sob iluminação de show" width="1920" height="1080">
+                <picture>
+                    <source media="(max-width: 750px)" srcset="assets/images/Banda-Mobile2.webp">
+                    <img src="assets/images/Banda2.webp" alt="Foto da banda Reatância no palco sob iluminação de show" width="750" height="937" fetchpriority="high">
+                </picture>
                 <figcaption class="hero-caption">
                     <h1>Banda Reatância</h1>
                     <p>O peso do Rock'n'Roll diretamente da Engenharia da UNESP.</p>
@@ -44,7 +49,7 @@
         <!-- Apresentação da Banda -->
         <section id="sobre" class="about">
             <h2>Sobre a Banda</h2>
-            <article>
+            <div>
                 <p style="text-indent: 2em;">A Reatância é uma banda cover de rock nascida em 2026 inicialmente no campus
                 de Engenharia de Controle e Automação da UNESP de Sorocaba. O nome surgiu devido à
                 matéria de circuitos elétricos, obrigatória para os alunos de Engenharia de Controle
@@ -65,21 +70,19 @@
                 </p>
                 <p style="text-indent: 2em;">Após o primeiro ensaio, os cinco começaram a pensar em um nome oficial para a banda, sendo as três
                 principais opções: "Reatância", "Impedância" e "Microfonia". Após uma votação, o nome "Reatância" foi escolhido, e a banda passou 
-                a se apresentar com esse nome.</p>
+                a se apresentar com esse nome.
                 </p>
-            </article>
+            </div>
         </section>
 
         <!-- Membros -->
         <section id="membros" class="members">
             <h2>Integrantes</h2>
             <div class="members-grid">
-                <!-- Adicione data-member e a tag de vídeo em todos os cards -->
-                <article class="member-card" data-member="soso">
+                <article class="member-card" data-member="soso" aria-label="Ver história de Soso">
                     <figure>
-                        <img src="assets/images/Soso.jpg" alt="Foto de Soso" width="300" height="300" loading="lazy">
-                        <!-- O vídeo que tocará no hover (coloque seu vídeo real de 5s no src) -->
-                        <video src="assets/videos/soso-hover.mp4" class="hover-video" muted loop playsinline></video>
+                        <img src="assets/images/Soso.webp" alt="Foto de Soso" width="300" height="300" loading="lazy">
+                        <video src="assets/videos/soso-hover.mp4" class="hover-video" muted loop playsinline preload="none"></video>
                         <figcaption>
                             <h3>Soso</h3>
                             <p>Vocalista | Engenharia UNESP</p>
@@ -87,10 +90,10 @@
                     </figure>
                 </article>
 
-                <article class="member-card" data-member="caets">
+                <article class="member-card" data-member="caets" aria-label="Ver história de Caets">
                     <figure>
-                        <img src="assets/images/Caets.jpg" alt="Foto de Caets" width="300" height="300" loading="lazy">
-                        <video src="assets/videos/caets-hover.mp4" class="hover-video" muted loop playsinline></video>
+                        <img src="assets/images/Caets.webp" alt="Foto de Caets" width="300" height="300" loading="lazy">
+                        <video src="assets/videos/caets-hover.mp4" class="hover-video" muted loop playsinline preload="none"></video>
                         <figcaption>
                             <h3>Caets</h3>
                             <p>Guitarra Solo | Engenharia UNESP</p>
@@ -98,10 +101,10 @@
                     </figure>
                 </article>
 
-                <article class="member-card" data-member="regata">
+                <article class="member-card" data-member="regata" aria-label="Ver história de Regata">
                     <figure>
-                        <img src="assets/images/Regata.jpg" alt="Foto de Regata" width="300" height="300" loading="lazy">
-                        <video src="assets/videos/regata-hover.mp4" class="hover-video" muted loop playsinline></video>
+                        <img src="assets/images/Regata.webp" alt="Foto de Regata" width="300" height="300" loading="lazy">
+                        <video src="assets/videos/regata-hover.mp4" class="hover-video" muted loop playsinline preload="none"></video>
                         <figcaption>
                             <h3>Regata</h3>
                             <p>Guitarra Base | Engenharia UNESP</p>
@@ -109,10 +112,10 @@
                     </figure>
                 </article>
 
-                <article class="member-card" data-member="tejada">
+                <article class="member-card" data-member="tejada" aria-label="Ver história de Tejada">
                     <figure>
-                        <img src="assets/images/Tejada.jpg" alt="Foto de Tejada" width="300" height="300" loading="lazy">
-                        <video src="assets/videos/tejada-hover.mp4" class="hover-video" muted loop playsinline></video>
+                        <img src="assets/images/Tejada.webp" alt="Foto de Tejada" width="300" height="300" loading="lazy">
+                        <video src="assets/videos/tejada-hover.mp4" class="hover-video" muted loop playsinline preload="none"></video>
                         <figcaption>
                             <h3>Tejada</h3>
                             <p>Baixista</p>
@@ -120,10 +123,10 @@
                     </figure>
                 </article>
 
-                <article class="member-card" data-member="bugas">
+                <article class="member-card" data-member="bugas" aria-label="Ver história de Bugas">
                     <figure>
-                        <img src="assets/images/Bugas.jpg" alt="Foto de Bugas" width="300" height="300" loading="lazy">
-                        <video src="assets/videos/bugas-hover.mp4" class="hover-video" muted loop playsinline></video>
+                        <img src="assets/images/Bugas.webp" alt="Foto de Bugas" width="300" height="300" loading="lazy">
+                        <video src="assets/videos/bugas-hover.mp4" class="hover-video" muted loop playsinline preload="none"></video>
                         <figcaption>
                             <h3>Bugas</h3>
                             <p>Baterista</p>
@@ -137,7 +140,7 @@
         <section id="midia" class="media">
             <h2>Reatância ao Vivo</h2>
             <figure class="video-container">
-                <video controls width="800" poster="assets/images/thumb-video.jpg">
+                <video controls width="800" poster="assets/images/thumb-video.webp" preload="none">
                     <source src="assets/videos/Creep.mp4" type="video/mp4">
                     Seu navegador não suporta a reprodução de vídeos HTML5.
                 </video>
@@ -179,74 +182,74 @@
             
             <div class="products-grid">
 
-                <!-- CAMISETAS (Manga Frente/Trás + Regata Frente/Trás) -->
+                <!-- CAMISETAS -->
                 <article class="product-card" data-images='[
-                    "assets/images/camiseta-frente.png",
-                    "assets/images/camiseta-costas.png",
-                    "assets/images/regata-frente.png",
-                    "assets/images/regata-costas.png"
+                    "assets/images/camiseta-frente.webp",
+                    "assets/images/camiseta-costas.webp",
+                    "assets/images/regata-frente.webp",
+                    "assets/images/regata-costas.webp"
                 ]'>
                     <figure class="product-gallery">
                         <button class="gallery-btn prev-btn" aria-label="Imagem anterior">&#10094;</button>
-                        <img src="assets/images/camiseta-frente.png" alt="Camiseta Oficial Reatância" class="product-img" width="250" height="250" loading="lazy">
+                        <img src="assets/images/camiseta-frente.webp" alt="Camiseta Oficial Reatância" class="product-img" width="250" height="250" loading="lazy">
                         <button class="gallery-btn next-btn" aria-label="Próxima imagem">&#10095;</button>
+                        <figcaption>
+                            <h3>Camiseta & Regata Oficial</h3>
+                            <p class="price">R$ 69,90</p>
+                        </figcaption>
                     </figure>
-                    <figcaption>
-                        <h3>Camiseta & Regata Oficial</h3>
-                        <p class="price">R$ 69,90</p>
-                    </figcaption>
                     <button class="btn-primary btn-buy" data-product="camiseta">Ver Opções</button>
                 </article>
 
-                <!-- BONÉS (Modelo 1 e Modelo 2) -->
+                <!-- BONÉS -->
                 <article class="product-card" data-images='[
-                    "assets/images/bone1.png",
-                    "assets/images/bone2.png",
-                    "assets/images/bone3.png"
+                    "assets/images/bone1.webp",
+                    "assets/images/bone2.webp",
+                    "assets/images/bone3.webp"
                 ]'>
                     <figure class="product-gallery">
                         <button class="gallery-btn prev-btn" aria-label="Imagem anterior">&#10094;</button>
-                        <img src="assets/images/bone1.png" alt="Boné Reatância" class="product-img" width="250" height="250" loading="lazy">
+                        <img src="assets/images/bone1.webp" alt="Boné Reatância" class="product-img" width="250" height="250" loading="lazy">
                         <button class="gallery-btn next-btn" aria-label="Próxima imagem">&#10095;</button>
+                        <figcaption>
+                            <h3>Boné Reatância</h3>
+                            <p class="price">R$ 49,90</p>
+                        </figcaption>
                     </figure>
-                    <figcaption>
-                        <h3>Boné Reatância</h3>
-                        <p class="price">R$ 49,90</p>
-                    </figcaption>
                     <button class="btn-primary btn-buy" data-product="bone">Ver Opções</button>
                 </article>
 
-                <!-- BOTTONS (Modelo 1 e Modelo 2) -->
+                <!-- BOTTONS -->
                 <article class="product-card" data-images='[
-                    "assets/images/botton1.png",
-                    "assets/images/botton2.png"
+                    "assets/images/botton1.webp",
+                    "assets/images/botton2.webp"
                 ]'>
                     <figure class="product-gallery">
                         <button class="gallery-btn prev-btn" aria-label="Imagem anterior">&#10094;</button>
-                        <img src="assets/images/botton1.png" alt="Bottom metálico" class="product-img" width="250" height="250" loading="lazy">
+                        <img src="assets/images/botton1.webp" alt="Bottom metálico" class="product-img" width="250" height="250" loading="lazy">
                         <button class="gallery-btn next-btn" aria-label="Próxima imagem">&#10095;</button>
+                        <figcaption>
+                            <h3>Botton</h3>
+                            <p class="price">R$ 3,00</p>
+                        </figcaption>
                     </figure>
-                    <figcaption>
-                        <h3>Botton</h3>
-                        <p class="price">R$ 3,00</p>
-                    </figcaption>
                     <button class="btn-primary btn-buy" data-product="bottom">Ver Opções</button>
                 </article>
 
-                <!-- ADESIVOS (Modelo 1 e Modelo 2) -->
+                <!-- ADESIVOS -->
                 <article class="product-card" data-images='[
-                    "assets/images/adesivo1.png",
-                    "assets/images/adesivo2.png"
+                    "assets/images/adesivo1.webp",
+                    "assets/images/adesivo2.webp"
                 ]'>
                     <figure class="product-gallery">
                         <button class="gallery-btn prev-btn" aria-label="Imagem anterior">&#10094;</button>
-                        <img src="assets/images/adesivo1.png" alt="Adesivo Vinílico" class="product-img" width="250" height="250" loading="lazy">
+                        <img src="assets/images/adesivo1.webp" alt="Adesivo Vinílico" class="product-img" width="250" height="250" loading="lazy">
                         <button class="gallery-btn next-btn" aria-label="Próxima imagem">&#10095;</button>
+                        <figcaption>
+                            <h3>Adesivo</h3>
+                            <p class="price">R$ 1,50</p>
+                        </figcaption>
                     </figure>
-                    <figcaption>
-                        <h3>Adesivo</h3>
-                        <p class="price">R$ 1,50</p>
-                    </figcaption>
                     <button class="btn-primary btn-buy" data-product="adesivo">Ver Opções</button>
                 </article>
 
@@ -268,13 +271,12 @@
                 <h3 id="modal-title">Nome do Integrante</h3>
                 <h4 id="modal-role">Função</h4>
                 <div id="modal-text">
-                    <!-- A história será injetada aqui pelo JavaScript -->
+                    <!-- história JavaScript -->
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Vínculo com o arquivo JS externo -->
     <script src="js/script.js"></script>
 </body>
 </html>

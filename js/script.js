@@ -18,7 +18,7 @@ const membersStories = {
         <p>Ensaiamos por uma semana e nos apresentamos. Após o evento, ficamos na sala fazendo um som acústico informal com o pessoal que continuava
         por lá, incluindo a Sophia — foi ali que descobri a voz incrível dela. No dia seguinte, ao final da reunião do coletivo do qual fazíamos
         parte, convidei-a para assumir os vocais da banda e ela aceitou no mesmo instante.
-        <p>O próximo passo era encontrar a cozinha do grupo. Naquele fim de semana, fui trocar uma ideia com meu amigo Vinícius. Como ele mora longe,
+        <p>O próximo passo era encontrar o peso do grupo, baixo e batera. Naquele fim de semana, fui trocar uma ideia com meu amigo Vinícius. Como ele mora longe,
         achei que não seria viável, apesar de saber que é baixista. Para minha surpresa, assim que mencionei o projeto, ele contou que estava louco
         para voltar a tocar e entrou para o time imediatamente. Para a bateria, mandei mensagem para diversos músicos de várias regiões, sem muito
         sucesso, até que um amigo me indicou o Bugas. Chamei ele no Instagram e, por coincidência, ele disse que fazia meses que procurava uma banda.
@@ -62,9 +62,7 @@ const membersStories = {
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Site da Banda Reatância carregado com sucesso!');
 
-    // =================================================================
     // LÓGICA DOS VÍDEOS NO HOVER E DO MODAL DE INTEGRANTES
-    // =================================================================
     const memberCards = document.querySelectorAll('.member-card');
     const modalOverlay = document.getElementById('member-modal');
     const modalCloseBtn = document.querySelector('.modal-close');
@@ -84,11 +82,11 @@ document.addEventListener('DOMContentLoaded', () => {
             
             card.addEventListener('mouseleave', () => {
                 video.pause();
-                video.currentTime = 0; // Reseta o vídeo para o começo
+                video.currentTime = 0;
             });
         }
 
-        // 2. Abrir a caixa flutuante (modal) ao clicar no card
+        // 2. Abrir a caixa flutuante ao clicar no card
         card.addEventListener('click', () => {
             if (memberId && membersStories[memberId]) {
                 const data = membersStories[memberId];
@@ -97,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 modalText.innerHTML = `<p>${data.story}</p>`;
                 
                 modalOverlay.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Trava o scroll do fundo
+                document.body.style.overflow = 'hidden';
             }
         });
     });
@@ -105,19 +103,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Funções para fechar o Modal
     const closeModal = () => {
         modalOverlay.classList.remove('active');
-        document.body.style.overflow = ''; // Destrava o scroll do fundo
+        document.body.style.overflow = '';
     };
 
     if (modalCloseBtn && modalOverlay) {
-        // Clicando no "X"
         modalCloseBtn.addEventListener('click', closeModal);
-        
-        // Clicando fora da caixa do modal (no overlay escuro)
         modalOverlay.addEventListener('click', (e) => {
             if (e.target === modalOverlay) closeModal();
         });
-        
-        // Fechando com a tecla "ESC"
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
                 closeModal();
@@ -125,9 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // =================================================================
     // LÓGICA DE AUTENTICAÇÃO E REDIRECIONAMENTO (LOJA E LOGIN)
-    // =================================================================
     const btnLogin = document.getElementById('btn-login');
     
     // Verifica se o usuário tem a chave 'logado' salva no navegador
@@ -138,11 +129,10 @@ document.addEventListener('DOMContentLoaded', () => {
             // Se estiver logado, muda o botão para "Sair"
             btnLogin.textContent = 'Sair';
             btnLogin.addEventListener('click', () => {
-                localStorage.removeItem('logado'); // Remove o login
-                window.location.reload(); // Recarrega a página
+                localStorage.removeItem('logado');
+                window.location.reload();
             });
         } else {
-            // Se não estiver, manda para a tela de login
             btnLogin.addEventListener('click', () => {
                 window.location.href = 'login.html?origem=home';
             });
@@ -162,9 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // =================================================================
     // CARROSSEL DE PRODUTOS DA LOJA
-    // =================================================================
     const productCards = document.querySelectorAll('.product-card[data-images]');
 
     productCards.forEach(card => {
@@ -200,5 +188,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (prevBtn) prevBtn.style.display = 'none';
             if (nextBtn) nextBtn.style.display = 'none';
         }
+
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                card.click();
+            }
+        });
     });
 });

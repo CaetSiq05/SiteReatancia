@@ -1,6 +1,4 @@
-// ==========================================
 // 1. CARROSSEL DE PRODUTOS
-// ==========================================
 document.querySelectorAll('.product-card[data-images]').forEach(card => {
     const images = JSON.parse(card.getAttribute('data-images'));
     const imgElement = card.querySelector('.product-img');
@@ -14,9 +12,7 @@ document.querySelectorAll('.product-card[data-images]').forEach(card => {
     }
 });
 
-// ==========================================
 // 2. LÓGICA DO CARRINHO E MODAIS
-// ==========================================
 let cart = [];
 let subtotal = 0;
 let valorFrete = 0;
@@ -118,9 +114,7 @@ function updateCartUI() {
     }
 }
 
-// ==========================================
 // 3. FLUXO DE CHECKOUT E MÁSCARAS
-// ==========================================
 document.getElementById('btn-open-cart').addEventListener('click', () => openModal('modal-cart'));
 
 document.getElementById('btn-checkout').addEventListener('click', () => {
@@ -133,7 +127,7 @@ document.getElementById('btn-checkout').addEventListener('click', () => {
     openModal('modal-checkout');
 });
 
-// --- Máscaras e API de CEP ---
+// Máscaras e API de CEP
 const cepInput = document.getElementById('cep-input');
 cepInput.addEventListener('input', async function(e) {
     // Formata o CEP: 00000-000
@@ -168,7 +162,7 @@ cepInput.addEventListener('input', async function(e) {
     }
 });
 
-// --- Máscaras do Cartão ---
+// Máscaras do Cartão
 const numCartaoInput = document.getElementById('cartao-numero');
 numCartaoInput.addEventListener('input', function(e) {
     let v = e.target.value.replace(/\D/g, ''); // Remove tudo que não é número
@@ -214,7 +208,6 @@ selectMetodo.addEventListener('change', function() {
     updateCheckoutTotal();
 });
 
-// Correção: gerarParcelas agora só roda quando necessário, não em looping
 function gerarParcelas() {
     let baseTotal = subtotal + valorFrete;
     selectParcela.innerHTML = '';
