@@ -1,4 +1,41 @@
+// 0. INTEGRAÇÃO COM A BASE DE DADOS
+
+async function carregarProdutosDoBanco() {
+    try {
+        const resposta = await fetch('http://localhost:3000/api/produtos');
+        const produtosDb = await resposta.json();
+
+        produtosDb.forEach(prod => {
+            // Encontra o botão correspondente no HTML original pelo ID do produto
+            const btn = document.querySelector(`.btn-add-cart[data-id="${prod.id}"]`);
+            if (btn) {
+                // Atualiza os dados invisíveis do botão com a informação real da base de dados
+                btn.dataset.name = prod.nome;
+                btn.dataset.price = prod.preco;
+                btn.dataset.img = prod.imagem_url;
+                btn.dataset.type = prod.tipo;
+
+                // Atualiza o texto do preço e do nome visualmente no ecrã
+                const card = btn.closest('.product-card');
+                if (card) {
+                    const nomeEl = card.querySelector('h2');
+                    const precoEl = card.querySelector('.price');
+                    if (nomeEl) nomeEl.innerText = prod.nome;
+                    if (precoEl) precoEl.innerText = `R$ ${parseFloat(prod.preco).toFixed(2).replace('.', ',')}`;
+                }
+            }
+        });
+    } catch (error) {
+        console.error('Erro ao ligar ao servidor de produtos:', error);
+    }
+}
+
+// Executa a procura na base de dados assim que o ficheiro é lido
+carregarProdutosDoBanco();
+
+
 // 1. CARROSSEL DE PRODUTOS
+
 document.querySelectorAll('.product-card[data-images]').forEach(card => {
     const images = JSON.parse(card.getAttribute('data-images'));
     const imgElement = card.querySelector('.product-img');
@@ -12,7 +49,9 @@ document.querySelectorAll('.product-card[data-images]').forEach(card => {
     }
 });
 
+
 // 2. LÓGICA DO CARRINHO E MODAIS
+
 let cart = [];
 let subtotal = 0;
 let valorFrete = 0;
@@ -32,11 +71,15 @@ function showToast() {
 function openModal(id) { document.getElementById(id).classList.add('active'); }
 function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 
+// Adiciona os eventos aos botões
 document.querySelectorAll('.btn-add-cart').forEach(btn => {
     btn.addEventListener('click', function() {
         const prod = {
-            id: this.dataset.id, name: this.dataset.name,
-            price: parseFloat(this.dataset.price), img: this.dataset.img, type: this.dataset.type
+            id: this.dataset.id, 
+            name: this.dataset.name,
+            price: parseFloat(this.dataset.price), 
+            img: this.dataset.img, 
+            type: this.dataset.type
         };
 
         if(prod.type === 'roupa') {
@@ -88,7 +131,7 @@ function updateCartUI() {
     subtotal = 0;
 
     if (cart.length === 0) {
-        cartContainer.innerHTML = '<p style="text-align:center; color:gray;">Seu carrinho está vazio.</p>';
+        cartContainer.innerHTML = '<p style="text-align:center; color:gray;">O seu carrinho está vazio.</p>';
     } else {
         cart.forEach((item, index) => {
             subtotal += item.price;
@@ -108,20 +151,31 @@ function updateCartUI() {
     }
     cartTotalDisplay.innerText = `Total: R$ ${subtotal.toFixed(2).replace('.', ',')}`;
     
-    // Atualiza as parcelas sempre que um item for adicionado/removido do carrinho
     if(document.getElementById('pagamento-metodo').value === 'credito') {
         gerarParcelas();
     }
 }
 
+
 // 3. FLUXO DE CHECKOUT E MÁSCARAS
+
 document.getElementById('btn-open-cart').addEventListener('click', () => openModal('modal-cart'));
 
 document.getElementById('btn-checkout').addEventListener('click', () => {
     if(cart.length === 0) {
-        alert("Seu carrinho está vazio!");
+        alert("O seu carrinho está vazio!");
         return;
     }
+    
+    // VERIFICAÇÃO DE SEGURANÇA: Só prossegue se o utilizador tiver feito login
+    const token = localStorage.getItem('token');
+    if (!token) {
+        alert("Tem de iniciar sessão para finalizar a compra!");
+        // Redireciona para o login e avisa que veio da loja
+        window.location.href = 'login_2.html?origem=loja';
+        return;
+    }
+
     closeModal('modal-cart');
     updateCheckoutTotal();
     openModal('modal-checkout');
@@ -130,12 +184,10 @@ document.getElementById('btn-checkout').addEventListener('click', () => {
 // Máscaras e API de CEP
 const cepInput = document.getElementById('cep-input');
 cepInput.addEventListener('input', async function(e) {
-    // Formata o CEP: 00000-000
     let v = e.target.value.replace(/\D/g, '');
     if (v.length > 5) v = v.slice(0, 5) + '-' + v.slice(5, 8);
     e.target.value = v;
 
-    // Quando bater 9 caracteres (completo), busca o endereço automaticamente
     if (v.length === 9) {
         const cepLimpo = v.replace('-', '');
         try {
@@ -146,9 +198,8 @@ cepInput.addEventListener('input', async function(e) {
                 document.getElementById('rua-input').value = data.logradouro;
                 document.getElementById('bairro-input').value = data.bairro;
                 document.getElementById('cidade-input').value = `${data.localidade} / ${data.uf}`;
-                document.getElementById('num-input').focus(); // Joga o cursor pro número
+                document.getElementById('num-input').focus();
                 
-                // Simula frete e atualiza valores
                 valorFrete = 15.90;
                 document.getElementById('frete-display').innerText = `Frete Transportadora: R$ 15,90`;
                 if(document.getElementById('pagamento-metodo').value === 'credito') gerarParcelas();
@@ -157,7 +208,7 @@ cepInput.addEventListener('input', async function(e) {
                 alert("CEP não encontrado. Verifique e tente novamente.");
             }
         } catch (error) {
-            console.error("Erro ao buscar CEP:", error);
+            console.error("Erro ao procurar CEP:", error);
         }
     }
 });
@@ -165,15 +216,15 @@ cepInput.addEventListener('input', async function(e) {
 // Máscaras do Cartão
 const numCartaoInput = document.getElementById('cartao-numero');
 numCartaoInput.addEventListener('input', function(e) {
-    let v = e.target.value.replace(/\D/g, ''); // Remove tudo que não é número
-    v = v.replace(/(\d{4})(?=\d)/g, '$1 ');    // Adiciona espaço a cada 4 dígitos
+    let v = e.target.value.replace(/\D/g, ''); 
+    v = v.replace(/(\d{4})(?=\d)/g, '$1 ');    
     e.target.value = v;
 });
 
 const validadeCartaoInput = document.getElementById('cartao-validade');
 validadeCartaoInput.addEventListener('input', function(e) {
     let v = e.target.value.replace(/\D/g, ''); 
-    if (v.length > 2) v = v.slice(0, 2) + '/' + v.slice(2, 4); // MM/AA
+    if (v.length > 2) v = v.slice(0, 2) + '/' + v.slice(2, 4); 
     e.target.value = v;
 });
 
@@ -182,7 +233,7 @@ cvvInput.addEventListener('input', function(e) {
     e.target.value = e.target.value.replace(/\D/g, ''); 
 });
 
-// --- Lógica de Pagamento ---
+// Lógica de Pagamento
 const selectMetodo = document.getElementById('pagamento-metodo');
 const containerCartao = document.getElementById('dados-cartao');
 const containerParcela = document.getElementById('parcelamento-container');
@@ -223,13 +274,11 @@ function gerarParcelas() {
     }
 }
 
-// Quando a parcela muda, apenas recálcula o total, sem recriar as opções
 selectParcela.addEventListener('change', updateCheckoutTotal);
 
 function updateCheckoutTotal() {
     let totalGeral = subtotal + valorFrete;
     
-    // Se for crédito e existirem parcelas criadas
     if (selectMetodo.value === 'credito' && selectParcela.options.length > 0) {
         const juros = parseFloat(selectParcela.options[selectParcela.selectedIndex].dataset.juros);
         totalGeral = totalGeral * juros;
@@ -238,23 +287,20 @@ function updateCheckoutTotal() {
     checkoutTotalDisplay.innerText = `Total a pagar: R$ ${totalGeral.toFixed(2).replace('.', ',')}`;
 }
 
-// --- Validação Final ---
+// Validação Final
 document.getElementById('checkout-form').addEventListener('submit', function(e) {
     e.preventDefault();
 
-    // Validação extra caso o método seja cartão (débito ou crédito)
     if (selectMetodo.value !== 'pix') {
         const numero = numCartaoInput.value;
         const validade = validadeCartaoInput.value;
         const cvv = cvvInput.value;
 
-        // 16 dígitos + 3 espaços = 19 caracteres
         if (numero.length < 19) {
             alert("Por favor, preencha o número do cartão corretamente (16 dígitos).");
             return;
         }
 
-        // Validação da Data
         if (validade.length < 5) {
             alert("A validade deve estar no formato MM/AA.");
             return;
@@ -262,7 +308,7 @@ document.getElementById('checkout-form').addEventListener('submit', function(e) 
 
         const mes = parseInt(validade.split('/')[0]);
         const ano = parseInt(validade.split('/')[1]);
-        const anoAtual = parseInt(String(new Date().getFullYear()).slice(-2)); // Ex: 2026 -> 26
+        const anoAtual = parseInt(String(new Date().getFullYear()).slice(-2)); 
 
         if (mes < 1 || mes > 12) {
             alert("Mês de validade inválido. Use um valor de 01 a 12.");
@@ -280,7 +326,7 @@ document.getElementById('checkout-form').addEventListener('submit', function(e) 
         }
     }
 
-    alert("Pedido confirmado com sucesso! A Reatância está chegando na sua casa!");
+    alert("Pedido confirmado com sucesso! A Reatância está a chegar a sua casa!");
     cart = [];
     valorFrete = 0;
     updateCartUI();
