@@ -71,24 +71,27 @@ function showToast() {
 function openModal(id) { document.getElementById(id).classList.add('active'); }
 function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 
-// Adiciona os eventos aos botões
+// Adiciona os eventos aos botões da loja
 document.querySelectorAll('.btn-add-cart').forEach(btn => {
     btn.addEventListener('click', function() {
+        // Criamos uma cópia nova dos dados do botão
         const prod = {
             id: this.dataset.id, 
             name: this.dataset.name,
             price: parseFloat(this.dataset.price), 
             img: this.dataset.img, 
-            type: this.dataset.type
+            type: this.dataset.type,
+            tamanho: null // Inicia sem tamanho por padrão
         };
 
-        if(prod.type === 'roupa') {
-            pendingProduct = prod;
+        if (prod.type === 'roupa') {
+            // Salva uma cópia independente no pendingProduct
+            pendingProduct = { ...prod };
             document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
             document.getElementById('confirm-size-btn').disabled = true;
             openModal('modal-size');
         } else {
-            addToCart(prod);
+            addToCart({ ...prod });
             showToast();
         }
     });
@@ -104,12 +107,21 @@ document.querySelectorAll('.size-btn').forEach(btn => {
     });
 });
 
+// Botão de confirmação de tamanho no modal
 document.getElementById('confirm-size-btn').addEventListener('click', () => {
-    if(pendingProduct && selectedSize) {
-        pendingProduct.name = `${pendingProduct.name} (Tam: ${selectedSize})`;
-        addToCart(pendingProduct);
+    if (pendingProduct && selectedSize) {
+        // Criamos um novo objeto com os dados finais da roupa
+        const itemFinal = {
+            ...pendingProduct,
+            tamanho: selectedSize,
+            name: `${pendingProduct.name} (Tam: ${selectedSize})`
+        };
+
+        addToCart(itemFinal);
         closeModal('modal-size');
         showToast();
+
+        // Reseta as variáveis temporárias
         pendingProduct = null;
         selectedSize = null;
     }
@@ -151,11 +163,10 @@ function updateCartUI() {
     }
     cartTotalDisplay.innerText = `Total: R$ ${subtotal.toFixed(2).replace('.', ',')}`;
     
-    if(document.getElementById('pagamento-metodo').value === 'credito') {
+    if (document.getElementById('pagamento-metodo').value === 'credito') {
         gerarParcelas();
     }
 }
-
 
 // 3. FLUXO DE CHECKOUT E MÁSCARAS
 
@@ -288,9 +299,10 @@ function updateCheckoutTotal() {
 }
 
 // Validação Final
-document.getElementById('checkout-form').addEventListener('submit', function(e) {
+document.getElementById('checkout-form').addEventListener('submit', async function(e) {
     e.preventDefault();
 
+    // 1. Validações de pagamento (apenas se for cartão)
     if (selectMetodo.value !== 'pix') {
         const numero = numCartaoInput.value;
         const validade = validadeCartaoInput.value;
@@ -326,10 +338,59 @@ document.getElementById('checkout-form').addEventListener('submit', function(e) 
         }
     }
 
-    alert("Pedido confirmado com sucesso! A Reatância está a chegar a sua casa!");
-    cart = [];
-    valorFrete = 0;
-    updateCartUI();
-    closeModal('modal-checkout');
-    window.location.href = 'index.html'; 
+    // 2. Cálculo do parcelamento (usando as variáveis já declaradas no arquivo)
+    let parcelasQtd = 1;
+    if (selectMetodo.value === 'credito' && selectParcela.value) {
+        parcelasQtd = parseInt(selectParcela.value) || 1;
+    }
+
+    // 3. Formatação do total e captura dos dados
+    const totalTexto = checkoutTotalDisplay.innerText.replace('Total a pagar: R$ ', '').replace(',', '.');
+    const valorTotal = parseFloat(totalTexto);
+    const token = localStorage.getItem('token');
+
+    // 4. Montagem do payload
+    const payload = {
+        total: valorTotal,
+        metodo_pagamento: selectMetodo.value,
+        parcelas: parcelasQtd,
+        cartao_numero: numCartaoInput.value,
+        itens: cart,
+        endereco: {
+            cep: document.getElementById('cep-input').value,
+            rua: document.getElementById('rua-input').value,
+            numero: document.getElementById('num-input').value,
+            complemento: document.getElementById('comp-input').value,
+            bairro: document.getElementById('bairro-input').value,
+            cidade: document.getElementById('cidade-input').value
+        }
+    };
+
+    // 5. Requisição para a API
+    try {
+        const resposta = await fetch('http://localhost:3000/api/pedidos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(payload)
+        });
+
+        const dados = await resposta.json();
+
+        if (resposta.status === 201) {
+            alert(dados.mensagem + " A Reatância agradece a sua compra!");
+            cart = [];
+            valorFrete = 0;
+            updateCartUI();
+            closeModal('modal-checkout');
+            window.location.href = 'index.html'; 
+        } else {
+            alert("Erro ao finalizar compra: " + (dados.mensagem || "Erro desconhecido"));
+        }
+    } catch (erro) {
+        console.error("Erro na comunicação com a API:", erro);
+        alert("Falha de comunicação com o servidor.");
+    }
 });

@@ -266,6 +266,58 @@ app.delete('/api/produtos/:id', verificarToken, verificarAdmin, regrasProduto, v
     });
 });
 
+// ROTA: FINALIZAR COMPRA (Checkout Completo)
+app.post('/api/pedidos', verificarToken, (req, res) => {
+    const { total, metodo_pagamento, parcelas, cartao_numero, itens, endereco } = req.body;
+    const usuarioId = req.user.id;
+
+    let cartaoFinal = null;
+    if (metodo_pagamento !== 'pix' && cartao_numero) {
+        const numeroLimpo = cartao_numero.replace(/\s/g, ''); 
+        cartaoFinal = numeroLimpo.slice(-4); 
+    }
+
+    // 1. Inserir o pedido incluindo a coluna 'parcelas'
+    const queryPedido = `
+        INSERT INTO pedidos 
+        (usuario_id, valor_total, metodo_pagamento, parcelas, cartao_final, cep, rua, numero, complemento, bairro, cidade) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `;
+    
+    const valoresPedido = [
+        usuarioId, total, metodo_pagamento, parcelas || 1, cartaoFinal, 
+        endereco.cep, endereco.rua, endereco.numero, endereco.complemento, endereco.bairro, endereco.cidade
+    ];
+
+    db.query(queryPedido, valoresPedido, (err, result) => {
+        if (err) {
+            console.error('Erro ao processar pedido:', err);
+            registrarLog('ERRO_INTERNO', `Falha ao gravar pedido: ${err.message}`);
+            return res.status(500).json({ status: 500, mensagem: 'Erro ao processar pagamento e endereço.' });
+        }
+        
+        const pedidoId = result.insertId;
+
+        // 2. Salvar os itens na tabela associativa
+        if (itens && itens.length > 0) {
+            const valoresItens = itens.map(item => [pedidoId, item.id, item.tamanho || null, 1, item.price]);
+            
+            const queryItens = 'INSERT INTO pedido_itens (pedido_id, produto_id, tamanho, quantidade, preco_unitario) VALUES ?';
+            
+            db.query(queryItens, [valoresItens], (errItem) => {
+                if (errItem) {
+                    console.error('Erro ao salvar itens do pedido:', errItem);
+                    return res.status(500).json({ status: 500, mensagem: 'Pedido criado, mas erro ao registrar itens.' });
+                }
+                registrarLog('CRIACAO_ENTIDADE', `Pedido ${pedidoId} (${parcelas || 1}x) registado com sucesso.`);
+                return res.status(201).json({ status: 201, mensagem: 'Pedido registado com sucesso!' });
+            });
+        } else {
+            return res.status(201).json({ status: 201, mensagem: 'Pedido registado (sem itens).' });
+        }
+    });
+});
+
 const PORT = process.env.PORT || 3000;
 
 // Só liga a porta se NÃO estiver a correr testes
