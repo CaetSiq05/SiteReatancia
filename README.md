@@ -8,6 +8,7 @@ Site desenvolvido como projeto académico para a banda de rock "Reatância". A a
 * **HTML5:** Estrutura semântica, acessibilidade e otimização.
 * **CSS3:** Design responsivo adaptado para dispositivos móveis e desktop.
 * **JavaScript:** Lógica de interatividade (modais, sistema de carrinho de compras).
+* **Integração de API Externa:** Uso da API ViaCEP para preenchimento automático e validação de moradas no checkout.
 
 **Back-end:**
 * **Node.js & Express:** Construção do servidor e rotas da API.
@@ -69,7 +70,10 @@ A API localiza-se em http://localhost:3000. Rotas protegidas exigem o envio do t
     PUT /api/produtos/:id: Atualiza os dados de um produto pelo ID. (Requer Token e Perfil Admin).
     DELETE /api/produtos/:id: Remove um produto pelo ID. (Requer Token e Perfil Admin).
 
-3. Sistema
+3. Gestão de Pedidos (Checkout)
+    POST /api/pedidos: Finaliza a compra do utilizador. (Requer Token). Recebe os dados do carrinho (produtos e tamanhos), valor total, método de pagamento, número de parcelas, morada de entrega e os dados do cartão de crédito. Por questões de segurança (simulação PCI-DSS), o Back-end extrai e guarda apenas os últimos 4 dígitos do cartão, descartando o restante. Regista o histórico nas tabelas relacionais `pedidos` e `pedido_itens`.
+
+4. Sistema
     GET /api/status: Health check para verificar se a API e os logs estão operacionais. Retorna 200 OK.
 
 ## 📊 Validação e Qualidade
